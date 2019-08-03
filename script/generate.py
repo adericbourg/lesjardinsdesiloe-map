@@ -68,7 +68,8 @@ def _generate_events(env: jinja2.Environment, output: str, data: Dict):
 
 def generate(output_dir: str):
     print(f"""Generating site "{settings.SITE_NAME}" into "{os.path.abspath(output_dir)}" """)
-    shutil.rmtree(output_dir)
+    if os.path.exists(output_dir):
+        shutil.rmtree(output_dir)
     os.makedirs(output_dir)
 
     content = _load_content()
