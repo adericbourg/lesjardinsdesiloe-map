@@ -32,6 +32,7 @@ def generate(output_dir: str):
     template_env = jinja2.Environment(loader=template_loader)
 
     _render_template(template_env, "index.template.html", os.path.join(output_dir, "index.html"))
+    _render_template(template_env, "events.template.html", os.path.join(output_dir, "events.html"))
 
 
 if __name__ == "__main__":
