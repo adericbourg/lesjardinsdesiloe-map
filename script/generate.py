@@ -15,10 +15,23 @@ def _read_yaml(file: str) -> Dict:
 
 
 def _load_content() -> Dict:
+    # Raw and exhaustive: might be good to sanitize this some day
     content = {
         **_read_yaml("reference.yml"),
         **_read_yaml("people.yml"),
     }
+    attendees = {}
+    for people in content["people"]:
+        if "events" in people:
+            for event in people["events"]:
+                code = event["code"]
+                date = event["date"]
+                if not code in attendees:
+                    attendees[code] = {}
+                if not date in attendees[code]:
+                    attendees[code][date] = list()
+                attendees[code][date].append(people)
+    content["attendees"] = attendees
     return content
 
 
@@ -37,7 +50,20 @@ def _render_template(env: jinja2.Environment, template: str, output: str, data: 
 
 
 def _generate_events(env: jinja2.Environment, output: str, data: Dict):
-    _render_template(env, "events.template.html", os.path.join(output, "events.html"), data)
+    events_path = os.path.join(output, "events")
+    os.mkdir(events_path)
+
+    _render_template(env, "events/index.template.html", os.path.join(events_path, "index.html"), data)
+    for event in data["events"]:
+        event_code = event["code"]
+        if event_code in data["attendees"]:
+            attendees = data["attendees"][event_code]
+        else:
+            attendees = list()
+        _render_template(env, "events/detail.template.html", os.path.join(events_path, f"{event_code.lower()}.html"), {
+            "event": event,
+            "attendees": attendees
+        })
 
 
 def generate(output_dir: str):

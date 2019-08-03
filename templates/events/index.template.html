@@ -9,7 +9,7 @@
 
     <ul>
         {% for event in page.events | sort(attribute='label')%}
-            <li>{{ event.label }}</li>
+            <li><a href="{{ event.code | lower }}.html">{{ event.label }}</a></li>
         {% else %}
             <li><em>Aucun stage référencé pour le moment<em></li>
         {% endfor %}
