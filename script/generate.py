@@ -6,6 +6,21 @@ import os
 import settings
 import shutil
 import sys
+from typing import Dict
+
+
+def _render_template(env: jinja2.Environment, template: str, output: str, data: Dict = {}):
+    template = env.get_template(template)
+    output_text = template.render({
+        "site": {
+            "title": settings.SITE_NAME,
+            "root_url": settings.ROOT_URL
+        },
+        "page": data
+    })
+
+    with open(output, "w") as fh:
+        fh.write(output_text)
 
 
 def generate(output_dir: str):
@@ -16,16 +31,7 @@ def generate(output_dir: str):
     template_loader = jinja2.FileSystemLoader(searchpath="./templates")
     template_env = jinja2.Environment(loader=template_loader)
 
-    template = template_env.get_template("index.template.html")
-    output_text = template.render({
-        "site": {
-            "title": settings.SITE_NAME,
-            "root_url": settings.ROOT_URL
-        }
-    })
-
-    with open(f"{output_dir}/index.html", "w") as fh:
-        fh.write(output_text)
+    _render_template(template_env, "index.template.html", os.path.join(output_dir, "index.html"))
 
 
 if __name__ == "__main__":
