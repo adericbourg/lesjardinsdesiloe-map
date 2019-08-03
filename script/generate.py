@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*- #
 
 import jinja2
+import macros
 import os
 import settings
 import shutil
@@ -76,6 +77,7 @@ def generate(output_dir: str):
 
     template_loader = jinja2.FileSystemLoader(searchpath="./templates")
     template_env = jinja2.Environment(loader=template_loader)
+    template_env.filters["render_people"] = macros.render_people
 
     _generate_events(template_env, output_dir, content)
     _render_template(template_env, "index.template.html", os.path.join(output_dir, "index.html"))

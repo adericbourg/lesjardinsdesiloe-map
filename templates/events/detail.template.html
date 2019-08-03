@@ -7,15 +7,15 @@
 {%- block content %}
     <h1>{{ page.event.label }}</h1>
 
-    {% for (session_date, attendees) in page.attendees.items() %}
+    {% for (session_date, attendees) in page.attendees.items() -%}
     <h2>{{ session_date }}</h2>
     <ul>
-        {% for attendee in attendees | sort(attribute='name') %}
-            <li>{{ attendee.name }}</li>
-        {% endfor %}
+        {% for attendee in attendees | sort(attribute='name') -%}
+            <li>{{ attendee | render_people }}</li>
+        {%- endfor %}
     </ul>
-    {% else %}
+    {% else -%}
     <em>Personne n'a encore déclaré avoir suivi ce stage</em>
-    {% endfor %}
+    {% endfor -%}
 
 {% endblock content -%}
