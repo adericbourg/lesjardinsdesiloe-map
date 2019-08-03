@@ -1,0 +1,11 @@
+---
+people:
+  - name: Lancelot Dulac
+    address: 35600 Redon
+    events:
+      - code: PAIN1
+        date: 2019-07
+      - code: EDUVI
+        date: 2017
+  - name: Galahad Lechaste
+    address: 1 rue du Rocher, 75009 Paris
