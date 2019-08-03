@@ -11,7 +11,7 @@ import yaml
 
 def _read_yaml(file: str) -> Dict:
     with open(f"content/{file}", "r") as f:
-        return yaml.load(f)
+        return yaml.load(f, Loader=yaml.SafeLoader)
 
 
 def _load_content() -> Dict:
@@ -36,18 +36,23 @@ def _render_template(env: jinja2.Environment, template: str, output: str, data: 
         fh.write(output_text)
 
 
+def _generate_events(env: jinja2.Environment, output: str, data: Dict):
+    _render_template(env, "events.template.html", os.path.join(output, "events.html"), data)
+
+
 def generate(output_dir: str):
     print(f"""Generating site "{settings.SITE_NAME}" into "{os.path.abspath(output_dir)}" """)
     shutil.rmtree(output_dir)
     os.makedirs(output_dir)
 
-    _ = _load_content()
+    content = _load_content()
 
     template_loader = jinja2.FileSystemLoader(searchpath="./templates")
     template_env = jinja2.Environment(loader=template_loader)
 
+    _generate_events(template_env, output_dir, content)
     _render_template(template_env, "index.template.html", os.path.join(output_dir, "index.html"))
-    _render_template(template_env, "events.template.html", os.path.join(output_dir, "events.html"))
+
 
 
 if __name__ == "__main__":

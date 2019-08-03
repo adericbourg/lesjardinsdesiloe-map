@@ -6,4 +6,13 @@
 
 {%- block content %}
     <h1>Stages et événements</h1>
+
+    <ul>
+        {% for event in page.events | sort(attribute='label')%}
+            <li>{{ event.label }}</li>
+        {% else %}
+            <li><em>Aucun stage référencé pour le moment<em></li>
+        {% endfor %}
+    </ul>
+
 {% endblock content -%}
