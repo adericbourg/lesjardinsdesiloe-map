@@ -1,0 +1,14 @@
+---
+events:
+  - code: PAIN1
+    label: De la semence au pain paysan - niveau 1
+  - code: PAIN2
+    label: De la semence au pain paysan - niveau 2
+  - code: PHYTO
+    label: Phytothérapie familiale
+  - code: PAINS
+    label: Pain & santé
+  - code: EDUVI
+    label: École du vivant
+  - code: AGROP
+    label: Agronomie pratique
