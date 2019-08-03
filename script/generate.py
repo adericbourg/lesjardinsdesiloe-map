@@ -7,6 +7,19 @@ import settings
 import shutil
 import sys
 from typing import Dict
+import yaml
+
+def _read_yaml(file: str) -> Dict:
+    with open(f"content/{file}", "r") as f:
+        return yaml.load(f)
+
+
+def _load_content() -> Dict:
+    content = {
+        **_read_yaml("reference.yml"),
+        **_read_yaml("people.yml"),
+    }
+    return content
 
 
 def _render_template(env: jinja2.Environment, template: str, output: str, data: Dict = {}):
@@ -27,6 +40,8 @@ def generate(output_dir: str):
     print(f"""Generating site "{settings.SITE_NAME}" into "{os.path.abspath(output_dir)}" """)
     shutil.rmtree(output_dir)
     os.makedirs(output_dir)
+
+    _ = _load_content()
 
     template_loader = jinja2.FileSystemLoader(searchpath="./templates")
     template_env = jinja2.Environment(loader=template_loader)
