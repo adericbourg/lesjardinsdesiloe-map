@@ -4,9 +4,10 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=endge, chrome=IE8" />
     <meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=no" />
-    <title>Écosite les Jardins de Siloë</title>
+    <title>{% block title %}{{ site.title }}{% endblock %}</title>
   </head>
   <body>
-    <h1>Bonjour&nbsp;!</h1>
+    {% block content %}
+    {% endblock content %}
   </body>
 </html>

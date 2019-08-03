@@ -1,3 +1,5 @@
+OUTPUT_DIR=output
+
 all: check publish
 
 help:
@@ -11,9 +13,8 @@ check:
 	@echo "No check yet :("
 
 publish:
-	mkdir -p output
-	cp templates/base.template.html output/index.html
+	@python script/generate.py $(OUTPUT_DIR)
 
 github: publish
-	ghp-import -m "(script) Generate site from source" -b master output
+	ghp-import -m "(script) Generate site from source" -b master $(OUTPUT_DIR)
 	git push origin master
