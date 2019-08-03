@@ -59,7 +59,7 @@ def _generate_events(env: jinja2.Environment, output: str, data: Dict):
         if event_code in data["attendees"]:
             attendees = data["attendees"][event_code]
         else:
-            attendees = list()
+            attendees = {}
         _render_template(env, "events/detail.template.html", os.path.join(events_path, f"{event_code.lower()}.html"), {
             "event": event,
             "attendees": attendees

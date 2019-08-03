@@ -7,4 +7,15 @@
 {%- block content %}
     <h1>{{ page.event.label }}</h1>
 
+    {% for (session_date, attendees) in page.attendees.items() %}
+    <h2>{{ session_date }}</h2>
+    <ul>
+        {% for attendee in attendees | sort(attribute='name') %}
+            <li>{{ attendee.name }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <em>Personne n'a encore déclaré avoir suivi ce stage</em>
+    {% endfor %}
+
 {% endblock content -%}
