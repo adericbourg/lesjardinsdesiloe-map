@@ -4,7 +4,10 @@
 import jinja2
 import macros
 import os
-import settings
+if "DEVSETTINGS" in os.environ:
+    import devsettings as settings
+else:
+    import settings
 import shutil
 import sys
 from typing import Dict
