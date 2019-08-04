@@ -5,9 +5,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=endge, chrome=IE8" />
   <meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=no" />
-  <title>
-    Stages et événements
-</title>
+  <title>Écosite les Jardins de Siloé</title>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css"
     integrity="sha256-xpOKVlYXzQ3P03j397+jWFZLMBXLES3IiryeClgU5og= sha384-gP4DhqyoT9b1vaikoHi9XQ8If7UNLO73JFOOlQV1RATrA7D0O7TjJZifac6NwPps sha512-AKwIib1E+xDeXe0tCgbc9uSvPwVYl6Awj7xl0FoaPFostZHOuDQ1abnDNCYtxL/HWEnVOMrFyf91TDgLPi9pNg=="
@@ -33,24 +31,29 @@
       <div class="grid-x grid-margin-x">
         <div class="cell">
           
-    <h1>Stages et événements</h1>
+<h1>Carte des participants aux stages</h1>
 
-    <ul>
-        
-            <li><a href="//lesjardinsdesiloe.github.io/events/agrop.html">Agronomie pratique</a></li>
-        
-            <li><a href="//lesjardinsdesiloe.github.io/events/pain1.html">De la semence au pain paysan - niveau 1</a></li>
-        
-            <li><a href="//lesjardinsdesiloe.github.io/events/pain2.html">De la semence au pain paysan - niveau 2</a></li>
-        
-            <li><a href="//lesjardinsdesiloe.github.io/events/pains.html">Pain & santé</a></li>
-        
-            <li><a href="//lesjardinsdesiloe.github.io/events/phyto.html">Phytothérapie familiale</a></li>
-        
-            <li><a href="//lesjardinsdesiloe.github.io/events/eduvi.html">École du vivant</a></li>
-        
-    </ul>
+<div id="map" style="height: 80vh;"></div>
+<script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+<script>
+    const from_projection = new OpenLayers.Projection("EPSG:4326"); // transform from WGS 1984
+    const to_projection = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
 
+    const initial_zoom = 3; // Relative zoom level
+
+    const map = new OpenLayers.Map("map");
+    map.addLayer(new OpenLayers.Layer.OSM());
+    map.setCenter(
+        new OpenLayers.LonLat(-2.0462868, 47.9071511).transform(from_projection, to_projection),
+        initial_zoom
+    );
+
+    // Markers
+    const markers = new OpenLayers.Layer.Markers("Markers");
+    map.addLayer(markers);
+
+    markers.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(-2.0462868, 47.9071511).transform(from_projection, to_projection)));
+</script>
 
         </div>
       </div>
