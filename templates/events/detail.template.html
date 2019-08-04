@@ -9,13 +9,15 @@
 
     {% for (session_date, attendees) in page.attendees.items() -%}
     <h2>{{ session_date }}</h2>
-    <ul>
+    <div class="grid-x grid-margin-x">
         {% for attendee in attendees | sort(attribute='name') -%}
-            <li>{{ attendee | render_people }}</li>
+            {{ attendee | render_people }}
         {%- endfor %}
-    </ul>
+    </div>
     {% else -%}
-    <em>Personne n'a encore déclaré avoir suivi ce stage</em>
+    <div class="cell">
+        <em>Personne n'a encore déclaré avoir suivi ce stage</em>
+    </div>
     {% endfor -%}
 
 {% endblock content -%}

@@ -1,0 +1,16 @@
+<div class="card cell small-3">
+    <div class="card-divider">
+        <h3 class="h5">{{ people.name }}</h3>
+    </div>
+    <div class="card-section">
+        {% if people.address %}
+            <p>{{ people.address }}</p>
+        {% endif %}
+        {% if people.email %}
+            <p><a href="mailto:{{ people.email }}">{{ people.email }}</a></p>
+        {% endif %}
+        {% if people.phone %}
+            <p>{{ people.phone }}</p>
+        {% endif %}
+    </div>
+</div>
