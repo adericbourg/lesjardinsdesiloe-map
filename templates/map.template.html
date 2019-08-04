@@ -1,7 +1,28 @@
 {% extends "base.template.html" %}
 
 {%- block content %}
-    <h1>Carte des participants aux stages</h1>
+<h1>Carte des participants aux stages</h1>
 
-    <div>TODO</div>
+<div id="map" style="height: 80vh;"></div>
+
+<link rel="stylesheet" href="//{{ site.root_url }}/static/ol/ol.css" type="text/css">
+<script src="//{{ site.root_url }}/static/ol/ol.js"></script>
+
+<script type="text/javascript">
+    const location_brambeac = ol.proj.fromLonLat([-2.0462868, 47.9071511]);
+
+    const map = new ol.Map({
+        target: 'map',
+        layers: [
+            new ol.layer.Tile({
+                source: new ol.source.OSM()
+            })
+        ],
+        view: new ol.View({
+            center: location_brambeac,
+            zoom: 3
+        })
+    });
+</script>
+
 {% endblock content -%}
