@@ -1,23 +1,37 @@
 {% extends "base.template.html" %}
 
 {%- block title %}
-    {{ page.event.label }}
+{{ page.event.label }}
 {% endblock title -%}
 
 {%- block content %}
-    <h1>{{ page.event.label }}</h1>
+<h1>{{ page.event.label }}</h1>
 
-    {% for (session_date, attendees) in page.attendees.items() -%}
-    <h2>{{ session_date }}</h2>
-    <div class="grid-x grid-margin-x">
-        {% for attendee in attendees | sort(attribute='name') -%}
-            {{ attendee | render_people }}
-        {%- endfor %}
+<div class="card">
+    <div class="card-divider">
+        <strong>Sessions</strong>
     </div>
-    {% else -%}
-    <div class="cell">
-        <em>Personne n'a encore déclaré avoir suivi ce stage</em>
+    <div class="card-section">
+        <ul>
+            {% for (session_date, _) in page.attendees.items() -%}
+            <li><a href="#{{ session_date | anchor }}">{{ session_date }}</a></li>
+            {% endfor %}
+        </ul>
     </div>
-    {% endfor -%}
+</div>
+
+
+{% for (session_date, attendees) in page.attendees.items() -%}
+<h2>{{ session_date }}<a name="{{ session_date | anchor }}"></a></h2>
+<div class="grid-x grid-margin-x">
+    {% for attendee in attendees | sort(attribute='name') -%}
+    {{ attendee | render_people }}
+    {%- endfor %}
+</div>
+{% else -%}
+<div class="cell">
+    <em>Personne n'a encore déclaré avoir suivi ce stage</em>
+</div>
+{% endfor -%}
 
 {% endblock content -%}

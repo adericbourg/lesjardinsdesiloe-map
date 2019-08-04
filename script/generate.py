@@ -80,6 +80,7 @@ def generate(output_dir: str):
 
     template_loader = jinja2.FileSystemLoader(searchpath="./templates")
     template_env = jinja2.Environment(loader=template_loader)
+    template_env.filters["anchor"] = macros.anchor
     template_env.filters["render_people"] = macros.render_people
 
     _generate_events(template_env, output_dir, content)
