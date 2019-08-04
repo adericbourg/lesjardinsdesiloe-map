@@ -70,6 +70,10 @@ def _generate_events(env: jinja2.Environment, output: str, data: Dict):
         })
 
 
+def _render_map(env: jinja2.Environment, output_dir: str, content: Dict):
+    _render_template(env, "map.template.html", os.path.join(output_dir, "map.html"))
+
+
 def generate(output_dir: str):
     print(f"""Generating site "{settings.SITE_NAME}" into "{os.path.abspath(output_dir)}" """)
     if os.path.exists(output_dir):
@@ -84,8 +88,8 @@ def generate(output_dir: str):
     template_env.filters["render_people"] = macros.render_people
 
     _generate_events(template_env, output_dir, content)
+    _render_map(template_env, output_dir, content)
     _render_template(template_env, "index.template.html", os.path.join(output_dir, "index.html"))
-
 
 
 if __name__ == "__main__":
