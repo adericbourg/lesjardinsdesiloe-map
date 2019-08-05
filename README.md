@@ -1,5 +1,7 @@
 # lesjardinsdesiloe.github.io
 
+[![Build Status](https://travis-ci.com/lesjardinsdesiloe/lesjardinsdesiloe.github.io.svg?branch=source)](https://travis-ci.com/lesjardinsdesiloe/lesjardinsdesiloe.github.io)
+
 > *Ce site est en développement et n'est en aucun cas de la responsabilité de l'association des Jardins de Siloé.*
 
 Ce site référence les participants aux différents événements organisés par les
