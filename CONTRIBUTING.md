@@ -38,6 +38,11 @@ make devserver
 ```
 
 The local website is available on [http://localhost:9000](http://localhost:9000).
+Then, each time you make a change, you should run this command to rebuild the site:
+
+```shell
+make dev
+```
 
 To build and push it for the web (it will override the current version with
 your own version):
