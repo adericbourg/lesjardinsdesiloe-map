@@ -7,6 +7,7 @@
 {%- block content %}
 <h1>{{ page.event.label }}</h1>
 
+{% if page.attendees.items() %}
 <div class="card">
     <div class="card-divider">
         <strong>Sessions</strong>
@@ -19,6 +20,7 @@
         </ul>
     </div>
 </div>
+{% endif %}
 
 
 {% for (session_date, attendees) in page.attendees.items() -%}
