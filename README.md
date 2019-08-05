@@ -8,3 +8,5 @@ Ce site référence les participants aux différents événements organisés par
 ## Je souhaite apparaître sur cette liste
 
 > Ce n'est pas possible pour le moment : ce site n'est encore qu'un prototype.
+
+[Comment construire ce site ?](CONTRIBUTING.md)
