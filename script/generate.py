@@ -1,17 +1,21 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 
+import os
+
 import jinja2
 import macros
-import os
+
 if "DEVSETTINGS" in os.environ:
     import devsettings as settings
 else:
     import settings
 import shutil
 import sys
-from typing import Dict
+from typing import Dict, List
 import yaml
+import nominatim
+
 
 def _read_yaml(file: str) -> Dict:
     with open(f"content/{file}", "r") as f:
@@ -70,8 +74,21 @@ def _generate_events(env: jinja2.Environment, output: str, data: Dict):
         })
 
 
+def _geocode_people(people: Dict) -> List:
+    geocoded_people = []
+    for p in people:
+        if "address" in p:
+            address = p["address"]
+            geo_result = nominatim.lookup(address)
+            if geo_result:
+                p["coordinates"] = geo_result
+                geocoded_people.append(p)
+    return geocoded_people
+
+
 def _render_map(env: jinja2.Environment, output_dir: str, content: Dict):
-    _render_template(env, "map.template.html", os.path.join(output_dir, "map.html"))
+    geocoded_people = _geocode_people(content["people"])
+    _render_template(env, "map.template.html", os.path.join(output_dir, "map.html"), {"people": geocoded_people})
 
 
 def _copy_static(output_dir: str):
