@@ -109,6 +109,14 @@
             <div class="dropdown-pane" id="dropdown-people-{{ loop.index }}" data-dropdown data-hover="true" data-hover-pane="true">
                 {% for people in grouped_people.people | sort(attribute='name') %}
                     {{ people | render_people }}
+                    {% if people.events %}
+                    <small>
+                        {% for event in people.events %}
+                            {{ event.code | as_event(events=page.events) }} ({{ event.date }})
+                            {{ ", " if not loop.last }}
+                        {% endfor %}
+                    </small>
+                    {% endif %}
                     {{ "<hr />" if not loop.last }}
                 {% endfor %}
             </div>`;
