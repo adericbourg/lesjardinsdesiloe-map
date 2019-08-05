@@ -7,5 +7,33 @@ people:
         date: 2019-07
       - code: EDUVI
         date: 2017
+  - name: Guenièvre Dulac
+    address: 35600 Redon
+    events:
+      - code: PAIN1
+        date: 2019-07
   - name: Galahad Lechaste
     address: 1 rue du Rocher, 75009 Paris
+  - name: Merlin Lenchanteur
+    address: France
+    events:
+      - code: PAIN1
+        date: 2019-07
+      - code: PAIN2
+        date: 2019-12
+      - code: EDUVI
+        date: 2012
+  - name: Ygerne Tintagel
+    address: Bruxelles
+    events:
+      - code: PAINS
+        date: 2018
+  - name: Mordred Levillain
+    address: Brest
+    events:
+      - code: PAIN1
+        date: 2019-12
+  - name: Viviane Excalibur
+    events:
+      - code: PAIN1
+        date: 2019-12
