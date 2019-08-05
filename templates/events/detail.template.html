@@ -25,7 +25,11 @@
 <h2>{{ session_date }}<a name="{{ session_date | anchor }}"></a></h2>
 <div class="grid-x grid-margin-x">
     {% for attendee in attendees | sort(attribute='name') -%}
-    {{ attendee | render_people }}
+    <div class="card cell small-3">
+        <div class="card-section">
+            {{ attendee | render_people }}
+        </div>
+    </div>
     {%- endfor %}
 </div>
 {% else -%}

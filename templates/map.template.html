@@ -107,21 +107,7 @@
                 </svg>
             </div>
             <div class="dropdown-pane" id="dropdown-people-{{ loop.index }}" data-dropdown data-hover="true" data-hover-pane="true">
-                <p>
-                    <strong>{{ people.name }}</strong>
-                </p>
-                <p>{{ people.address }}</p>
-                {% if people.email or people.phone %}
-                <p>
-                    {% if people.phone %}
-                    {{ people.phone }}
-                    {% if people.email %}<br />{% endif %}
-                    {% endif %}
-                    {% if people.email %}
-                    <a href="mailto:{{ people.email }}">{{ people.email }}</a>
-                    {% endif %}
-                </p>
-                {% endif %}
+                {{ people | render_people }}
             </div>`;
         let people_marker_{{ loop.index }} = new ol.Overlay({
             position: people_location_{{ loop.index }},
