@@ -75,8 +75,8 @@
     });
     map.addOverlay(marker);
 
-    {% for people in page.people %}
-        let people_location_{{ loop.index }} = ol.proj.fromLonLat([{{ people.coordinates.lon }}, {{ people.coordinates.lat }}]);
+    {% for grouped_people in page.people %}
+        let people_location_{{ loop.index }} = ol.proj.fromLonLat([{{ grouped_people.location.lon }}, {{ grouped_people.location.lat }}]);
         let people_element_{{ loop.index }} = document.createElement('div');
         people_element_{{ loop.index }}.innerHTML = `
             <div data-toggle="dropdown-people-{{ loop.index }}">
@@ -107,7 +107,10 @@
                 </svg>
             </div>
             <div class="dropdown-pane" id="dropdown-people-{{ loop.index }}" data-dropdown data-hover="true" data-hover-pane="true">
-                {{ people | render_people }}
+                {% for people in grouped_people.people | sort(attribute='name') %}
+                    {{ people | render_people }}
+                    {{ "<hr />" if not loop.last }}
+                {% endfor %}
             </div>`;
         let people_marker_{{ loop.index }} = new ol.Overlay({
             position: people_location_{{ loop.index }},

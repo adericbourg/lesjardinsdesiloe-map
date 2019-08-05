@@ -15,6 +15,7 @@ import sys
 from typing import Dict, List
 import yaml
 import nominatim
+from itertools import groupby
 
 
 def _read_yaml(file: str) -> Dict:
@@ -74,7 +75,14 @@ def _generate_events(env: jinja2.Environment, output: str, data: Dict):
         })
 
 
-def _geocode_people(people: Dict) -> List:
+def _group_people_by_geolocation(geocoded_people: List[Dict]) -> List[Dict]:
+    sorted_input = sorted(geocoded_people, key=lambda p: p["coordinates"])
+    groups = groupby(sorted_input, key=lambda p: p["coordinates"])
+    grouped = [{'location': k, 'people': [x for x in v]} for k, v in groups]
+    return grouped
+
+
+def _geocode_people(people: List[Dict]) -> List[Dict]:
     geocoded_people = []
     for p in people:
         if "address" in p:
@@ -83,7 +91,8 @@ def _geocode_people(people: Dict) -> List:
             if geo_result:
                 p["coordinates"] = geo_result
                 geocoded_people.append(p)
-    return geocoded_people
+
+    return _group_people_by_geolocation(geocoded_people)
 
 
 def _render_map(env: jinja2.Environment, output_dir: str, content: Dict):
