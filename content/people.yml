@@ -2,6 +2,8 @@
 people:
   - name: Lancelot Dulac
     address: 35600 Redon
+    phone: 02 34 56 78 91
+    email: lancelot.dulac@no-log.org
     events:
       - code: PAIN1
         date: 2019-07
@@ -9,6 +11,7 @@ people:
         date: 2017
   - name: Guenièvre Dulac
     address: 35600 Redon
+    email: gdulac@no-log.org
     events:
       - code: PAIN1
         date: 2019-07
@@ -30,6 +33,7 @@ people:
         date: 2018
   - name: Mordred Levillain
     address: Brest
+    email: brutus@cesarlegacy.org
     events:
       - code: PAIN1
         date: 2019-12

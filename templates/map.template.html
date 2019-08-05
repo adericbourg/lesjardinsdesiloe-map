@@ -111,6 +111,17 @@
                     <strong>{{ people.name }}</strong>
                 </p>
                 <p>{{ people.address }}</p>
+                {% if people.email or people.phone %}
+                <p>
+                    {% if people.phone %}
+                    {{ people.phone }}
+                    {% if people.email %}<br />{% endif %}
+                    {% endif %}
+                    {% if people.email %}
+                    <a href="mailto:{{ people.email }}">{{ people.email }}</a>
+                    {% endif %}
+                </p>
+                {% endif %}
             </div>`;
         let people_marker_{{ loop.index }} = new ol.Overlay({
             position: people_location_{{ loop.index }},
