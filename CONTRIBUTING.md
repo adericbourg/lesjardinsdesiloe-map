@@ -44,6 +44,14 @@ Then, each time you make a change, you should run this command to rebuild the si
 make dev
 ```
 
+As a shortcut, you may combine it with:
+
+```shell
+make watch
+```
+
+This command will rebuild the full site every time you will make a change.
+
 To build and push it for the web (it will override the current version with
 your own version):
 
