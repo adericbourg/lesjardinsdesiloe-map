@@ -18,9 +18,12 @@ def lookup(address_query: str) -> Optional[Coordinates]:
         if len(content) > 0:
             address = content[0]
             if len(content) > 1:
-                print(f"Found several places for address '{address_query}':")
-                for o in content[1:]:
-                    print(f"  {o}")
+                print(f"Found several places for address '{address_query}' (took the first one):")
+                chosen_display_name = address["display_name"]
+                print(f"* {chosen_display_name}")
+                for other in content[1:]:
+                    display_name = other["display_name"]
+                    print(f"  {display_name}")
             return Coordinates(address["lat"], address["lon"])
         print(f"Address not found: '{address_query}' (got {len(content)} results): \n{content}")
     return None
