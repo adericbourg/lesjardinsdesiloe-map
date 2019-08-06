@@ -13,7 +13,7 @@ help:
 	@echo '   make github                         publicly publish output            '
 
 check:
-	@echo "No check yet :("
+	@python -m unittest discover -s tests
 
 dev:
 	@DEVSETTINGS=true python script/generate.py $(OUTPUT_DIR)
